@@ -1,7 +1,7 @@
 const pg = require('pg');
 
 const config = {
-    host: '',
+    host: '106.240.247.42',
     port: '5432',
     user: 'genie',
     password: 'genie01',
