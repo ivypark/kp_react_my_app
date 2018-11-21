@@ -6,50 +6,55 @@ const Wines = (() => {
     }
 
     Wines.prototype.findById = (req, res) => {
-        console.log('## Wines.prototype.findById');
+        let id = req.params.id;
+        console.log('## Wines.prototype.findById, params :', req.params);
 
-        const sql = `SELECT * FROM {DB}`;
+        const sql = `SELECT * FROM wine.wine WHERE seq = ${id}`;
         db.query(sql, (err, result) => {
+            console.log('wine db result : ', result);
             if (!err) res.send(result);
         });
     }
 
     Wines.prototype.findAll = (req, res) => {
-        let id = req.params.id;
-        console.log('## Wines.prototype.findAll, params : ', req.params);
+        console.log('## Wines.prototype.findAll');
 
-        const sql = `SELECT * FROM {DB} WHERE ID = '${id}'`;
+        const sql = `SELECT * FROM wine.wine`;
         db.query(sql, (err, result) => {
-            if (!err) res.send(result);
+            console.log('wine db result : ', result);
+            if (!err) res.send(result.rows);
         });
     }
 
-    Wines.prototype.insert = (req, res) => {
+    Wines.prototype.insertWine = (req, res) => {
         console.log('## Wines.prototype.insert');
 
-        const sql = `INSERT INTO {DB}{COLUMN} VALUES ({VALUES})`;
+        const sql = `INSERT INTO wine.wine(seq, name) VALUES ((SELECT MAX(seq) FROM wine.wine) + 1, 'wine4')`;
         db.query(sql, (err, result) => {
-            if (!err) res.send(result);
+            console.log('wine db result : ', result);
+            if (!err) res.send('inserted was successful');
         });
     }
 
-    Wines.prototype.update = (req, res) => {
+    Wines.prototype.updateWine = (req, res) => {
         let id = req.params.id;
         console.log('## Wines.prototype.update, params : ', req.params);
 
-        const sql = `UPDATE {DB} SET {COLUMN} = ? WHERE ID = '${id}'`;
+        const sql = `UPDATE wine.wine SET name = 'modified wine' WHERE seq = ${id}`;
         db.query(sql, (err, result) => {
-            if (!err) res.send(result);
+            console.log('wine db result : ', result);
+            if (!err) res.send('updated was successful');
         });
     }
 
-    Wines.prototype.delete = (req, res) => {
+    Wines.prototype.deleteWine = (req, res) => {
         let id = req.params.id;
         console.log('## Wines.prototype.delete, params : ', req.params);
 
-        const sql = `DELETE FROM {DB} WHERE ID = '${id}'`;
+        const sql = `DELETE FROM wine.wine WHERE seq = ${id}`;
         db.query(sql, (err, result) => {
-            if (!err) res.send(result);
+            console.log('wine db result : ', result);
+            if (!err) res.send('deleted was successful');
         });
     }
 

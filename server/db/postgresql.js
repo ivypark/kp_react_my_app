@@ -5,7 +5,7 @@ const config = {
     port: '5432',
     user: 'genie',
     password: 'genie01',
-    database: '?'
+    database: 'yayspp'
 }
 
 const db = new pg.Pool(config);
