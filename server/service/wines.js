@@ -14,7 +14,7 @@ const Wines = (() => {
             console.log('wine db result : ', result);
             if (!err) res.send(result);
         });
-    }
+    };
 
     Wines.prototype.findAll = (req, res) => {
         console.log('## Wines.prototype.findAll');
@@ -24,7 +24,7 @@ const Wines = (() => {
             console.log('wine db result : ', result);
             if (!err) res.send(result.rows);
         });
-    }
+    };
 
     Wines.prototype.insertWine = (req, res) => {
         console.log('## Wines.prototype.insert');
@@ -34,7 +34,7 @@ const Wines = (() => {
             console.log('wine db result : ', result);
             if (!err) res.send('inserted was successful');
         });
-    }
+    };
 
     Wines.prototype.updateWine = (req, res) => {
         let id = req.params.id;
@@ -45,7 +45,7 @@ const Wines = (() => {
             console.log('wine db result : ', result);
             if (!err) res.send('updated was successful');
         });
-    }
+    };
 
     Wines.prototype.deleteWine = (req, res) => {
         let id = req.params.id;
@@ -56,7 +56,7 @@ const Wines = (() => {
             console.log('wine db result : ', result);
             if (!err) res.send('deleted was successful');
         });
-    }
+    };
 
     return new Wines;
 })();
